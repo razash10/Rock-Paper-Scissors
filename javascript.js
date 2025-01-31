@@ -24,31 +24,35 @@ function isWinning(choiceA, choiceB)
            (choiceA === 'scissors' && choiceB === 'paper');
 }
 
-function playRound(humanChoice, computerChoice) 
+function playRound(humanChoice) 
 {
+    const computerChoice = getComputerChoice();
+    let result = 'Unexpected error';
+    let winner = '';
+
     if (humanChoice !== 'rock' && humanChoice !== 'paper' && humanChoice !== 'scissors')
     {
-        console.log("Invalid choice!");
-        return;
+        result = "Invalid choice!";
+    }
+    else if (humanChoice === computerChoice)
+    {
+        result = "It's a tie!";
+    }
+    else if (isWinning(humanChoice, computerChoice))
+    {
+        result = "You win! " + humanChoice + " beats " + computerChoice;
+        winner = 'human';
+    }
+    else if (isWinning(computerChoice, humanChoice))
+    {
+        result = "You lose! " + computerChoice + " beats " + humanChoice;
+        winner = 'computer';
     }
 
-    if (humanChoice === computerChoice)
-    {
-        console.log("It's a tie!");
-        return;
-    }
-
-    if (isWinning(humanChoice, computerChoice))
-    {
-        console.log("You win! " + humanChoice + " beats " + computerChoice);
-        return 'human';
-    }
-
-    if (isWinning(computerChoice, humanChoice))
-    {
-        console.log("You lose! " + computerChoice + " beats " + humanChoice);
-        return 'computer';
-    }
+    document.getElementById("humanChoice").innerHTML = "Your choice: " + humanChoice;
+    document.getElementById("computerChoice").innerHTML = "Computer's choice: " + computerChoice;
+    document.getElementById("result").innerHTML = result;
+    return winner;
 }
 
 function printWinner(humanScore, computerScore)
@@ -78,8 +82,7 @@ function playGame()
     for (let i = 0; i < 5; i++)
     {
         const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        
+
         let winner = playRound(humanChoice, computerChoice);
 
         if (winner === 'human')
