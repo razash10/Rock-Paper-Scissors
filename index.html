@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Rock Paper Scissors</title>
 </head>
-<body>
+<body style="text-align: center;">
     <script src="javascript.js"></script>
+    <div class="score">
+        <p id="humanScore">Human: 0</p>
+        <p id="computerScore">Computer: 0</p>
+    </div>
     <div class="buttons">
         <button id="rock" onclick="playRound('rock')">Rock</button>
         <button id="paper" onclick="playRound('paper')">Paper</button>
@@ -15,6 +19,7 @@
         <p id="humanChoice"></p>
         <p id="computerChoice"></p>
         <p id="result"></p>
+        <h3 id="finalResult"></p>
     </div>
 </body>
 </html>
